@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum MatchupStatus {
+  ACTIVE
+  EXPIRED
+}
+
+model Song {
+  id        String   @id @default(cuid())
+  title     String
+  artist    String
+  audioUrl  String
+  createdAt DateTime @default(now())
+
+  matchupsAsA Matchup[] @relation("SongA")
+  matchupsAsB Matchup[] @relation("SongB")
+  votes       Vote[]
+}
+
+model Matchup {
+  id        String        @id @default(cuid())
+  songA     Song          @relation("SongA", fields: [songAId], references: [id])
+  songAId   String
+  songB     Song          @relation("SongB", fields: [songBId], references: [id])
+  songBId   String
+  status    MatchupStatus @default(ACTIVE)
+  expiresAt DateTime
+  createdAt DateTime      @default(now())
+
+  votes Vote[]
+}
+
+model Vote {
+  id        String   @id @default(cuid())
+  matchup   Matchup  @relation(fields: [matchupId], references: [id], onDelete: Cascade)
+  matchupId String
+  song      Song     @relation(fields: [songId], references: [id])
+  songId    String
+  createdAt DateTime @default(now())
+}
