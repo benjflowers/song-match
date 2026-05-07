@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Heading } from '@/components/ui/Heading';
 import { MatchupVote } from '@/components/ui/MatchupVote';
 import { getActiveMatchup } from '@/features/matchup/api/getActiveMatchup';
@@ -20,6 +21,9 @@ export default async function HomePage() {
     <main className="flex min-h-screen flex-col items-center justify-center gap-8">
       <Heading level="h1">Pick which one you like best</Heading>
       <MatchupVote matchupId={matchup.id} songA={matchup.songA} songB={matchup.songB} />
+      <Link href="/history" className="text-sm text-gray-400 hover:text-gray-700 transition-colors">
+        View History →
+      </Link>
     </main>
   );
 }
