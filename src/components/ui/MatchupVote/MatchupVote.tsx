@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { VideoCard } from '@/components/ui/VideoCard';
+import { useVoterId } from '@/features/matchup/hooks/useVoterId';
 
 type Song = {
   id: string;
@@ -17,6 +18,7 @@ type MatchupVoteProps = {
 
 export function MatchupVote({ songA, songB }: MatchupVoteProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  useVoterId();
 
   return (
     <div className="flex items-center gap-6">
