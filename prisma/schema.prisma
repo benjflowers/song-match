@@ -42,5 +42,8 @@ model Vote {
   matchupId String
   song      Song     @relation(fields: [songId], references: [id])
   songId    String
+  voterId   String
   createdAt DateTime @default(now())
+
+  @@unique([matchupId, voterId])
 }

@@ -53,13 +53,13 @@ async function main() {
 
   await prisma.vote.createMany({
     data: [
-      { matchupId: expiredMatchup1.id, songId: songs[2].id },
-      { matchupId: expiredMatchup1.id, songId: songs[2].id },
-      { matchupId: expiredMatchup1.id, songId: songs[3].id },
-      { matchupId: expiredMatchup2.id, songId: songs[4].id },
-      { matchupId: expiredMatchup2.id, songId: songs[5].id },
-      { matchupId: expiredMatchup2.id, songId: songs[5].id },
-      { matchupId: expiredMatchup2.id, songId: songs[5].id },
+      { matchupId: expiredMatchup1.id, songId: songs[2].id, voterId: '001' },
+      { matchupId: expiredMatchup1.id, songId: songs[2].id, voterId: '002' },
+      { matchupId: expiredMatchup1.id, songId: songs[3].id, voterId: '003' },
+      { matchupId: expiredMatchup2.id, songId: songs[4].id, voterId: '001' },
+      { matchupId: expiredMatchup2.id, songId: songs[5].id, voterId: '002' },
+      { matchupId: expiredMatchup2.id, songId: songs[5].id, voterId: '003' },
+      { matchupId: expiredMatchup2.id, songId: songs[5].id, voterId: '004' },
     ],
   });
 
