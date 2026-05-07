@@ -2,6 +2,7 @@ import { Heading } from '@/components/ui/Heading';
 import { MatchupVote } from '@/components/ui/MatchupVote';
 import { getActiveMatchup } from '@/features/matchup/api/getActiveMatchup';
 
+// revalidating the page is handled via cron - until then we want the matchup return to be cached
 export const revalidate = false;
 
 export default async function HomePage() {
@@ -18,7 +19,7 @@ export default async function HomePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-8">
       <Heading level="h1">Pick which one you like best</Heading>
-      <MatchupVote songA={matchup.songA} songB={matchup.songB} />
+      <MatchupVote matchupId={matchup.id} songA={matchup.songA} songB={matchup.songB} />
     </main>
   );
 }
