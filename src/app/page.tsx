@@ -2,6 +2,8 @@ import { Heading } from '@/components/ui/Heading';
 import { MatchupVote } from '@/components/ui/MatchupVote';
 import { getActiveMatchup } from '@/features/matchup/api/getActiveMatchup';
 
+export const revalidate = false;
+
 export default async function HomePage() {
   const matchup = await getActiveMatchup();
 
