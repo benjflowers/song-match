@@ -22,13 +22,14 @@ export function VideoCard({ videoId, title, artist, isDeactivated = false, isSel
           : 'border-gray-200'
       }`}
     >
-      <div className="aspect-video w-full">
+      <div className="relative aspect-video w-full">
         <YouTube
           videoId={videoId}
           opts={{ width: '100%', height: '100%' }}
           className="h-full w-full"
           iframeClassName="h-full w-full"
         />
+        {isDeactivated && <div className="absolute inset-0" />}
       </div>
       <div className="p-4 flex items-center justify-between gap-3">
         <div className="min-w-0">
