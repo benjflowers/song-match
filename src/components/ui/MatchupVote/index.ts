@@ -1,0 +1,1 @@
+export { MatchupVote } from './MatchupVote';
