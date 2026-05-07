@@ -15,7 +15,7 @@ model Song {
   id        String   @id @default(cuid())
   title     String
   artist    String
-  audioUrl  String
+  youtubeId  String
   createdAt DateTime @default(now())
 
   matchupsAsA Matchup[] @relation("SongA")
