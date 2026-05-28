@@ -15,22 +15,22 @@ async function main() {
 
   const songs = await Promise.all([
     prisma.song.create({
-      data: { title: "It Was A Good Day", artist: "Ice Cube", youtubeId: "h4UqMyldS7Q" },
+      data: { title: "It Was A Good Day", artist: "Ice Cube", youtubeId: "h4UqMyldS7Q", genre: "Hip-Hop", year: 1992 },
     }),
     prisma.song.create({
-      data: { title: "Can I Kick It", artist: "A Tribe Called Quest", youtubeId: "7D_JwgIM-y4" },
+      data: { title: "Can I Kick It", artist: "A Tribe Called Quest", youtubeId: "7D_JwgIM-y4", genre: "Hip-Hop", year: 1990 },
     }),
     prisma.song.create({
-      data: { title: "93 'Til Infinity", artist: "Souls of Mischief", youtubeId: "fXJc2NYwHjw" },
+      data: { title: "93 'Til Infinity", artist: "Souls of Mischief", youtubeId: "fXJc2NYwHjw", genre: "Hip-Hop", year: 1993 },
     }),
     prisma.song.create({
-      data: { title: "Electric Relaxation", artist: "A Tribe Called Quest", youtubeId: "WHRnvjCkTsw" },
+      data: { title: "Electric Relaxation", artist: "A Tribe Called Quest", youtubeId: "WHRnvjCkTsw", genre: "Hip-Hop", year: 1993 },
     }),
     prisma.song.create({
-      data: { title: "C.R.E.A.M.", artist: "Wu-Tang Clan", youtubeId: "PBwAxmrE194" },
+      data: { title: "C.R.E.A.M.", artist: "Wu-Tang Clan", youtubeId: "PBwAxmrE194", genre: "Hip-Hop", year: 1993 },
     }),
     prisma.song.create({
-      data: { title: "Temperature's Rising", artist: "Mobb Deep", youtubeId: "51qX7C3KAXE" },
+      data: { title: "Temperature's Rising", artist: "Mobb Deep", youtubeId: "51qX7C3KAXE", genre: "Hip-Hop", year: 1993 },
     }),
   ]);
 
