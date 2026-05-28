@@ -16,6 +16,8 @@ model Song {
   title     String
   artist    String
   youtubeId  String
+  genre     String?
+  year      Int?
   createdAt DateTime @default(now())
 
   matchupsAsA Matchup[] @relation("SongA")
