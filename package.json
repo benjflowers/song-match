@@ -4,12 +4,12 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "db-reset": "npx prisma migrate reset && npx prisma db seed",
     "import-song": "npx tsx prisma/import-song.ts",
-    "db:backup": "pg_dump --data-only --no-owner --inserts --on-conflict-do-nothing -t '\"Song\"' -f prisma/backup.sql \"$DATABASE_URL\"",
+    "db:backup": "docker-compose exec -T postgres pg_dump -U songmatchup --data-only --no-owner --inserts --on-conflict-do-nothing -t '\"Song\"' songmatchup_dev > prisma/backup.sql",
     "db:restore-prod": "psql \"$PROD_DATABASE_URL\" < prisma/backup.sql",
     "cron:trigger": "curl -s http://localhost:3000/api/cron/daily-matchup -H \"Authorization: Bearer $CRON_SECRET\" | cat"
   },
