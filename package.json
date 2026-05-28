@@ -10,7 +10,7 @@
     "db-reset": "npx prisma migrate reset && npx prisma db seed",
     "import-song": "npx tsx prisma/import-song.ts",
     "db:backup": "docker-compose exec -T postgres pg_dump -U songmatchup --data-only --no-owner --inserts --on-conflict-do-nothing -t '\"Song\"' songmatchup_dev > prisma/backup.sql",
-    "db:restore-prod": "psql \"$PROD_DATABASE_URL\" < prisma/backup.sql",
+    "db:restore-prod": "dotenv -e .env.local -- sh -c 'psql \"$PROD_DATABASE_URL\" < prisma/backup.sql'",
     "cron:trigger": "curl -s http://localhost:3000/api/cron/daily-matchup -H \"Authorization: Bearer $CRON_SECRET\" | cat"
   },
   "devDependencies": {
@@ -19,6 +19,7 @@
     "@types/pg": "^8.20.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.5",
     "postcss": "^8.5.14",
