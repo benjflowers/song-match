@@ -1,5 +1,6 @@
 'use client';
 
+import { ResultsBar } from '@/components/ui/ResultsBar';
 import { VideoCard } from '@/components/ui/VideoCard';
 import { useVote } from '@/features/matchup/hooks/useVote';
 
@@ -31,17 +32,7 @@ export function MatchupVote({ matchupId, songA, songB }: MatchupVoteProps) {
             isDeactivated={selectedSongId !== null && selectedSongId !== songA.id}
             onVote={() => vote(songA.id)}
           />
-          {results !== null && (
-            <div className="w-full mt-2 px-1">
-              <div className="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gray-900 rounded-full transition-all duration-700"
-                  style={{ width: `${results[songA.id] ?? 0}%` }}
-                />
-              </div>
-              <p className="text-sm font-semibold text-gray-700 mt-1 text-center">{results[songA.id] ?? 0}%</p>
-            </div>
-          )}
+          {results !== null && <ResultsBar percent={results[songA.id] ?? 0} />}
         </div>
         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gray-900 text-sm font-bold text-white ring-4 ring-gray-200">
           OR
@@ -55,17 +46,7 @@ export function MatchupVote({ matchupId, songA, songB }: MatchupVoteProps) {
             isDeactivated={selectedSongId !== null && selectedSongId !== songB.id}
             onVote={() => vote(songB.id)}
           />
-          {results !== null && (
-            <div className="w-full mt-2 px-1">
-              <div className="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gray-900 rounded-full transition-all duration-700"
-                  style={{ width: `${results[songB.id] ?? 0}%` }}
-                />
-              </div>
-              <p className="text-sm font-semibold text-gray-700 mt-1 text-center">{results[songB.id] ?? 0}%</p>
-            </div>
-          )}
+          {results !== null && <ResultsBar percent={results[songB.id] ?? 0} />}
         </div>
       </div>
       {selectedSongId !== null && (
