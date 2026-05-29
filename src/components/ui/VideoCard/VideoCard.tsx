@@ -14,7 +14,7 @@ type VideoCardProps = {
 export function VideoCard({ videoId, title, artist, isDeactivated = false, isSelected = false, onVote }: VideoCardProps) {
   return (
     <div
-      className={`relative flex flex-col overflow-hidden rounded-2xl border bg-white shadow-sm w-80 transition-all duration-300 ${
+      className={`relative flex flex-col overflow-hidden rounded-2xl border bg-white shadow-sm w-full md:w-80 transition-all duration-300 ${
         isDeactivated
           ? 'border-gray-100 opacity-40 grayscale'
           : isSelected

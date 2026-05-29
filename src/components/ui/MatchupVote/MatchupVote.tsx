@@ -20,8 +20,8 @@ export function MatchupVote({ matchupId, songA, songB }: MatchupVoteProps) {
   const { vote, selectedSongId } = useVote(matchupId);
 
   return (
-    <div className="flex flex-col items-center gap-6">
-      <div className="flex items-center gap-6">
+    <div className="flex flex-col items-center gap-6 w-full px-4">
+      <div className="flex flex-col md:flex-row items-center gap-6 w-full md:w-auto">
         <VideoCard
           videoId={songA.videoId}
           title={songA.title}
