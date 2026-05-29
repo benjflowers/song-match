@@ -25,7 +25,7 @@ export default async function HomePage() {
       <div className="flex flex-col items-center gap-2 text-center">
         <div className="flex items-center gap-2">
           <span className="text-xs font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-            {today} · Today&apos;s Matchup
+            Today&apos;s Matchup: {today}
           </span>
           <StreakBadge />
         </div>

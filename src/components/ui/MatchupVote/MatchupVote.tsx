@@ -32,7 +32,7 @@ export function MatchupVote({ matchupId, songA, songB }: MatchupVoteProps) {
             isDeactivated={selectedSongId !== null && selectedSongId !== songA.id}
             onVote={() => vote(songA.id)}
           />
-          {results !== null && <ResultsBar percent={results[songA.id] ?? 0} />}
+          {selectedSongId !== null && <ResultsBar percent={results?.[songA.id] ?? 0} />}
         </div>
         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gray-900 text-sm font-bold text-white ring-4 ring-gray-200">
           OR
@@ -46,7 +46,7 @@ export function MatchupVote({ matchupId, songA, songB }: MatchupVoteProps) {
             isDeactivated={selectedSongId !== null && selectedSongId !== songB.id}
             onVote={() => vote(songB.id)}
           />
-          {results !== null && <ResultsBar percent={results[songB.id] ?? 0} />}
+          {selectedSongId !== null && <ResultsBar percent={results?.[songB.id] ?? 0} />}
         </div>
       </div>
       {selectedSongId !== null && (
