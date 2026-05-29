@@ -19,6 +19,7 @@ export type MatchupHistoryItem = {
 
 export async function getMatchupsHistory(): Promise<MatchupHistoryItem[]> {
   const matchups = await prisma.matchup.findMany({
+    where: { status: 'EXPIRED' },
     include: {
       songA: true,
       songB: true,
