@@ -17,30 +17,56 @@ type MatchupVoteProps = {
 };
 
 export function MatchupVote({ matchupId, songA, songB }: MatchupVoteProps) {
-  const { vote, selectedSongId } = useVote(matchupId);
+  const { vote, selectedSongId, results } = useVote(matchupId);
 
   return (
     <div className="flex flex-col items-center gap-6 w-full px-4">
       <div className="flex flex-col md:flex-row items-center gap-6 w-full md:w-auto">
-        <VideoCard
-          videoId={songA.videoId}
-          title={songA.title}
-          artist={songA.artist}
-          isSelected={selectedSongId === songA.id}
-          isDeactivated={selectedSongId !== null && selectedSongId !== songA.id}
-          onVote={() => vote(songA.id)}
-        />
+        <div className="flex flex-col items-center w-full md:w-80">
+          <VideoCard
+            videoId={songA.videoId}
+            title={songA.title}
+            artist={songA.artist}
+            isSelected={selectedSongId === songA.id}
+            isDeactivated={selectedSongId !== null && selectedSongId !== songA.id}
+            onVote={() => vote(songA.id)}
+          />
+          {results !== null && (
+            <div className="w-full mt-2 px-1">
+              <div className="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gray-900 rounded-full transition-all duration-700"
+                  style={{ width: `${results[songA.id] ?? 0}%` }}
+                />
+              </div>
+              <p className="text-sm font-semibold text-gray-700 mt-1 text-center">{results[songA.id] ?? 0}%</p>
+            </div>
+          )}
+        </div>
         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gray-900 text-sm font-bold text-white ring-4 ring-gray-200">
           OR
         </div>
-        <VideoCard
-          videoId={songB.videoId}
-          title={songB.title}
-          artist={songB.artist}
-          isSelected={selectedSongId === songB.id}
-          isDeactivated={selectedSongId !== null && selectedSongId !== songB.id}
-          onVote={() => vote(songB.id)}
-        />
+        <div className="flex flex-col items-center w-full md:w-80">
+          <VideoCard
+            videoId={songB.videoId}
+            title={songB.title}
+            artist={songB.artist}
+            isSelected={selectedSongId === songB.id}
+            isDeactivated={selectedSongId !== null && selectedSongId !== songB.id}
+            onVote={() => vote(songB.id)}
+          />
+          {results !== null && (
+            <div className="w-full mt-2 px-1">
+              <div className="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gray-900 rounded-full transition-all duration-700"
+                  style={{ width: `${results[songB.id] ?? 0}%` }}
+                />
+              </div>
+              <p className="text-sm font-semibold text-gray-700 mt-1 text-center">{results[songB.id] ?? 0}%</p>
+            </div>
+          )}
+        </div>
       </div>
       {selectedSongId !== null && (
         <p className="text-sm text-gray-500">You&apos;ve already voted today. Check back tomorrow for a new matchup!</p>
