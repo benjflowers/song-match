@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Heading } from '@/components/ui/Heading';
 import { MatchupVote } from '@/components/ui/MatchupVote';
+import { StreakBadge } from '@/components/ui/StreakBadge';
 import { getActiveMatchup } from '@/features/matchup/api/getActiveMatchup';
 
 // revalidating the page is handled via cron - until then we want the matchup return to be cached
@@ -22,9 +23,12 @@ export default async function HomePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-8 px-4">
       <div className="flex flex-col items-center gap-2 text-center">
-        <span className="text-xs font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-          {today} · Today&apos;s Matchup
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+            {today} · Today&apos;s Matchup
+          </span>
+          <StreakBadge />
+        </div>
         <Heading level="h1">Pick which one you like best</Heading>
         <p className="text-sm text-gray-500">A new matchup every day. Vote once, check back tomorrow to see who wins.</p>
       </div>
