@@ -1,6 +1,7 @@
 import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { getStrategy } from '@/features/matchup/selection';
 
 export async function GET(request: Request) {
   const authHeader = request.headers.get('authorization');
@@ -18,16 +19,18 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'Not enough songs' }, { status: 500 });
   }
 
-  const shuffled = songs.sort(() => Math.random() - 0.5);
-  const [songA, songB] = shuffled;
+  const { searchParams } = new URL(request.url);
+  const strategyParam = (searchParams.get('strategy') ?? 'EXCLUDE_RECENT').toUpperCase();
+  const strategy = getStrategy(strategyParam);
+  const { songAId, songBId } = await strategy({ songs, prisma });
 
   const expiresAt = new Date();
   expiresAt.setUTCHours(23, 59, 59, 999);
 
   await prisma.matchup.create({
     data: {
-      songAId: songA.id,
-      songBId: songB.id,
+      songAId,
+      songBId,
       status: 'ACTIVE',
       expiresAt,
     },
@@ -36,5 +39,5 @@ export async function GET(request: Request) {
   revalidatePath('/');
   revalidatePath('/history');
 
-  return NextResponse.json({ revalidated: true });
+  return NextResponse.json({ revalidated: true, strategy: strategyParam });
 }

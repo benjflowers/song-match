@@ -1,7 +1,7 @@
 {
   "crons": [
     {
-      "path": "/api/cron/daily-matchup",
+      "path": "/api/cron/daily-matchup?strategy=EXCLUDE_RECENT",
       "schedule": "0 0 * * *"
     }
   ]
